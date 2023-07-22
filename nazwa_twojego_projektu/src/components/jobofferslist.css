@@ -1,0 +1,42 @@
+.jobOffersContainer {
+	background-color: #f5f5f5;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	margin: 20px 0;
+	text-align: center;
+}
+
+.jobOfferCard {
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	padding: 16px;
+	margin-bottom: 20px;
+}
+
+.jobOfferCard h3 {
+	color: #007bff;
+}
+
+.jobOfferCard p {
+	margin-bottom: 8px;
+}
+
+.jobOfferCard p:last-child {
+	margin-bottom: 0;
+}
+
+.button {
+	background-color: #007bff;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.button:hover {
+	background-color: #0056b3;
+}

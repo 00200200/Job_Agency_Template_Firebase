@@ -1,0 +1,49 @@
+.formContainer {
+	background-color: #f5f5f5;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	margin: 20px 0;
+}
+
+.formContainer form {
+	display: flex;
+	flex-direction: column;
+}
+
+.formContainer label {
+	margin-bottom: 8px;
+}
+
+.formContainer input[type='text'],
+.formContainer input[type='email'],
+.formContainer input[type='file'] {
+	padding: 8px;
+	margin-bottom: 16px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.formContainer p {
+	margin-bottom: 8px;
+}
+
+.formContainer label input[type='radio'] {
+	margin-right: 8px;
+}
+
+.formContainer button[type='submit'],
+.formContainer button.closeButton {
+	background-color: #007bff;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.formContainer button[type='submit']:hover,
+.formContainer button.closeButton:hover {
+	background-color: #0056b3;
+}
