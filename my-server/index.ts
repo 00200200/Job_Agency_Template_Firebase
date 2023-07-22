@@ -3,11 +3,11 @@ import nodemailer from 'nodemailer';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import multer, { Multer } from 'multer';
-dotenv.config(); 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
-app.use(cors()); 
+app.use(cors());
 const transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
@@ -38,7 +38,6 @@ app.post('/api/sendEmail', upload.single('cv'), (req: Request, res: Response) =>
 	};
 
 	if (req.file) {
-
 		mailOptions.attachments.push({
 			filename: req.file.originalname,
 			content: req.file.buffer,
