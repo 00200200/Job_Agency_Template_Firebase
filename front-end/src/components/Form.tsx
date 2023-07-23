@@ -44,7 +44,7 @@ const Form: React.FC<FormProps> = ({ selectedOffer, onClose }) => {
 			setIsSuccess(false);
 			setIsFormVisible(true);
 			onClose();
-		}, 0); 
+		}, 0);
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -82,7 +82,6 @@ const Form: React.FC<FormProps> = ({ selectedOffer, onClose }) => {
 			if (!response.ok) {
 				throw new Error(`Network response was not ok - Status: ${response.status}, Message: ${response.statusText}`);
 			}
-			const data = await response.json();
 			setIsFormSubmitted(true);
 			setIsSuccess(true);
 			// setIsFormVisible(false); // Remove this line to keep the form visible after successful submission
