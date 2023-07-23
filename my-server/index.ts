@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(express.json());
 
-const allowedOrigins = ['http://localhost:3000', 'https://jobboard-fyzl.onrender.com'];
+const allowedOrigins = ['http://localhost:3000'];
 const corsOptions: cors.CorsOptions = {
 	origin: (origin, callback) => {
 		if (!origin || allowedOrigins.includes(origin)) {

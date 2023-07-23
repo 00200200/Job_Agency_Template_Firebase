@@ -75,7 +75,7 @@ const Form: React.FC<FormProps> = ({ selectedOffer, onClose }) => {
 		}
 
 		try {
-			const response = await fetch('https://jobboard-fyzl.onrender.com/api/sendEmail', {
+			const response = await fetch('http://localhost:5000/api/sendEmail', {
 				method: 'POST',
 				body: dataToSend,
 			});
