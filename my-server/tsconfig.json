@@ -6,5 +6,5 @@
 		"strict": true,
 		"esModuleInterop": true
 	},
-	"include": ["index.ts", "Form.tsx"] // Add Form.tsx to the include array
+	"include": ["index.ts", "Form.tsx"] 
 }

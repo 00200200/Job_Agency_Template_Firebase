@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import './form.css';
-import { JobOffer } from './JobOffersList';
 
-interface FormProps {
-	selectedOffer: JobOffer; 
+export interface JobOffer {
+	id?: string;
+	title?: string;
+	description?: string;
+	price?: number;
+	location?: string;
 }
 
-const Form: React.FC<FormProps> = ({ selectedOffer }) => {
+interface FormProps {
+	selectedOffer: JobOffer;
+	onClose: () => void;
+}
+
+const Form: React.FC<FormProps> = ({ selectedOffer, onClose }) => {
 	const [cvFile, setCvFile] = useState<File | null>(null);
 	const [formData, setFormData] = useState({
 		name: '',
@@ -14,6 +22,7 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 	});
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
+	const [isFormVisible, setIsFormVisible] = useState(true);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -27,10 +36,15 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 	};
 
 	const handleClose = () => {
-		setFormData({ name: '', email: '' });
-		setCvFile(null);
-		setIsFormSubmitted(false);
-		setIsSuccess(false);
+		setIsFormVisible(false);
+		setTimeout(() => {
+			setFormData({ name: '', email: '' });
+			setCvFile(null);
+			setIsFormSubmitted(false);
+			setIsSuccess(false);
+			setIsFormVisible(true);
+			onClose();
+		}, 0); 
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -39,6 +53,7 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 			alert('Proszę wypełnić wszystkie pola formularza.');
 			return;
 		}
+
 		const dataToSend = new FormData();
 		if (formData.name) {
 			dataToSend.append('name', formData.name);
@@ -48,6 +63,12 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 		}
 		if (selectedOffer.id) {
 			dataToSend.append('selectedOfferId', selectedOffer.id);
+		}
+		if (selectedOffer.title) {
+			dataToSend.append('selectedOfferTitle', selectedOffer.title);
+		}
+		if (selectedOffer.location) {
+			dataToSend.append('selectedOfferLocation', selectedOffer.location);
 		}
 		if (cvFile) {
 			dataToSend.append('cv', cvFile, cvFile.name);
@@ -64,6 +85,7 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 			const data = await response.json();
 			setIsFormSubmitted(true);
 			setIsSuccess(true);
+			// setIsFormVisible(false); // Remove this line to keep the form visible after successful submission
 		} catch (error) {
 			console.error('Błąd podczas wysyłania formularza:', error);
 			setIsFormSubmitted(true);
@@ -73,7 +95,7 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 
 	return (
 		<div className='formContainer'>
-			{!isFormSubmitted ? (
+			{isFormVisible && !isFormSubmitted ? (
 				<>
 					<button className='closeButton' onClick={handleClose}>
 						Zamknij
@@ -92,6 +114,10 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 							<p>{selectedOffer.title}</p>
 						</div>
 						<div>
+							<label>Lokacja oferty:</label>
+							<p>{selectedOffer.location}</p>
+						</div>
+						<div>
 							<label htmlFor='cv'>CV (plik PDF):</label>
 							<input type='file' id='cv' name='cv' accept='.pdf' onChange={handleFileChange} />
 						</div>
@@ -101,6 +127,9 @@ const Form: React.FC<FormProps> = ({ selectedOffer }) => {
 			) : (
 				<div className='responseMessage'>
 					{isSuccess ? <p>Formularz został pomyślnie wysłany!</p> : <p>Wystąpił błąd podczas wysyłania formularza.</p>}
+					<button className='closeButton' onClick={handleClose}>
+						Zamknij
+					</button>
 				</div>
 			)}
 		</div>
