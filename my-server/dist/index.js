@@ -22,7 +22,7 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
 app.use(express_1.default.json());
-const allowedOrigins = ['http://localhost:3000', 'https://jobboard-fyzl.onrender.com'];
+const allowedOrigins = ['http://localhost:3000'];
 const corsOptions = {
     origin: (origin, callback) => {
         if (!origin || allowedOrigins.includes(origin)) {
